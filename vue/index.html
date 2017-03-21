@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VueTest</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<script src= "./app.js" ></script>
+	<link rel="stylesheet" href="./main.css">
+</head>
+<body>
+	<div id="todo-list">
+	  <input
+		  type= "text"
+		  v-model="newTodoText"
+		  placeholder="Add Task" >
+	  <button
+		  type="submit"
+		  @click="addNewTask"
+		  v-show="newTodoText">
+	  	AddTask
+	  </button>
+	  <table v-if="todos && todos.length">
+	  	<thead>
+                <tr>
+                     <th>Id</th>
+                     <th>Task</th>
+                     <th>Done</th>
+                     <th>Delete</th>
+                    </tr>
+                </thead>
+	  	<tbody>
+	  		<tr>
+                     <td></td>
+                     <td>ALL</td>
+                     <td>
+	                     <label>
+	                     	<input type="checkbox"	v-model="isDone">
+                     	</label>
+                     </td>
+                     <td>
+                     	<button
+	                     	type="button"
+	                     	@click="removeAll">
+                     	  [X]
+                     	</button>
+                     </td>
+                </tr>
+	  		<tr
+	  			is="todo-item"
+				v-for="(todo, index) in todos"
+				v-bind:task="todo"
+				v-on:remove="todos.splice(index, 1)">
+	  		</tr>
+	  	</tbody>
+	  </table>
+	</div>
+
+</body>
+</html>
